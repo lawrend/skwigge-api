@@ -5,6 +5,9 @@
 * rails new . --api --database=postgresql -T --no-rdoc --no-ri
 * -T flag means do not include testunit
 * run server with command: rails s -p 3001
+* rails scaffold was hanging after making the first model. fixed by running 'spring stop' in the command line
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
