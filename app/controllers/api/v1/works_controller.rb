@@ -37,17 +37,22 @@ module Api::V1
     # DELETE /works/1
     def destroy
       @work.destroy
-    end
+      if @work.destroy
+        head :no_content, status: :ok
+      else 
+        render json: @work.errors, status: :unprocessable_entity
 
-    private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_work
-      @work = Work.find(params[:id])
-    end
+      end
 
-    # Only allow a trusted parameter "white list" through.
-    def work_params
-      params.require(:work).permit(:title, :artist, :year, :image_url)
+      private
+      # Use callbacks to share common setup or constraints between actions.
+      def set_work
+        @work = Work.find(params[:id])
+      end
+
+      # Only allow a trusted parameter "white list" through.
+      def work_params
+        params.require(:work).permit(:title, :artist, :year, :image_url)
+      end
     end
   end
-end

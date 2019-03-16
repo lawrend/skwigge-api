@@ -37,6 +37,11 @@ module Api::V1
     # DELETE /collections/1
     def destroy
       @collection.destroy
+      if @collection.destroy
+        head :no_content, status: :ok
+      else 
+        render json: @collection.errors, status: :unprocessable_entity
+      end
     end
 
     private
