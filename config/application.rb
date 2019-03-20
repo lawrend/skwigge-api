@@ -32,6 +32,7 @@ module SkwiggeApi
     # Skip views, helpers and assets when generating a new resource.
     #
     config.middleware.use ActionDispatch::Cookies
+    config.omniauth
     # config.middleware.use ActionDispatch::Session::CacheStore
     # config.middleware.use ActionDispatch::Session::CookieStore
     # config.middleware.use ActionDispatch::Session::MemCacheStore
