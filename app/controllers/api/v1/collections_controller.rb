@@ -4,54 +4,11 @@ module Api::V1
   class CollectionsController < ApplicationController
     before_action :set_collection, only: [:show, :update, :destroy]
 
-    def collections
-      conn = Faraday.new "https://rijksmuseum.nl/"
-      @culture="en"
-      @objnum="SK-C-5"
-      # conn = Faraday.new "https://rijksmuseum.nl/api/#{@culture}/collection/#{@objnum}"
-      resp = conn.get "en/api/collection/#{@objnum}?format=json&key=#{ENV['MUSEUM_API_KEY']}" 
-      @thisthing = resp.body
-
-      # conn = Faraday.new(:url => "https://rijksmuseum.nl/api/en/") do |faraday|
-      #   faraday.request :url_encoded
-      #   faraday.response :logger
-      #   faraday.adapter Faraday.default_adapter
-      #   faraday.params['key'] = ENV['MUSEUM_API_KEY']
-      # end
-      # # resp = conn.get do |req|
-      #   req.params['imgonly'] = 'True'
-      #   req.params['format'] = 'json'
-      #   req.params['key'] = ENV['MUSEUM_API_KEY']
-      # end
-      # @collections = conn.body
-      # render json: @collections
-    end
-
     # GET /collections
     def index
-      getstuff = Collection.get_enigma
+      getstuff = Collection.search_enigma_api('homes')
       render json: getstuff
-
-      # resp = Faraday.get "https://rijksmuseum.nl/api/en/collection/SK-C-5?key=Pm44XICe&format=json" 
-      # @thisthing = resp.body
-      # render json: @thisthing 
       
-
-      # conn = Faraday.new(:url => "https://rijksmuseum.nl/") do |faraday|
-      #   faraday.request :url_encoded
-      #   faraday.response :logger
-      #   faraday.adapter Faraday.default_adapter
-      # end
-
-      # conn = Faraday.new "https://rijksmuseum.nl/"
-      # @culture="en"
-      # @objnum="SK-C-5"
-      # # conn = Faraday.new "https://rijksmuseum.nl/api/#{@culture}/collection/#{@objnum}"
-      # resp = conn.get "en/api/collection/#{@objnum}?format=json&key=#{ENV['MUSEUM_API_KEY']}" 
-      # @thisthing = resp.body
-      
-      # render json: @thisthing 
-
       # @collections = Collection.all
       # self.collections
       # render json: @collections

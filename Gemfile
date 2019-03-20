@@ -18,7 +18,6 @@ gem 'puma', '~> 3.11'
 
 # use faraday for api calls
 gem 'faraday', '~> 0.9.2'
-gem 'faraday-cookie_jar'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
