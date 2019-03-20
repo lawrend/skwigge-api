@@ -1,13 +1,12 @@
 module Api::V1
 
   
-  class CollectionsController < ApplicationController
+  class CollectionsController < BaseController
     before_action :set_collection, only: [:show, :update, :destroy]
 
     # GET /collections
     def index
-      getstuff = Collection.search_enigma_api('homes')
-      render json: getstuff
+      respond_with Collection.get_enigma_collections
       
       # @collections = Collection.all
       # self.collections
